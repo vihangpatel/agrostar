@@ -1,0 +1,156 @@
+.container {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+
+    &__header {
+        width: 100%;
+        height: $header-height;
+        background: $color-agro-red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 8px;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+    }
+
+    &__btn-group {
+        margin-top: 20px;
+        justify-content: flex-end;
+        display: flex;
+        padding: 16px;
+    }
+
+    &__form-section {
+        margin: auto;
+        max-width: $max-width;
+        color: $color-text;
+
+        .title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sub-form {
+            padding: 16px;
+        }
+
+        .input-field {
+            margin-right: 40px;
+
+            label {
+               margin-right: 10px;
+
+               &:after {
+                content: "*";
+                color: red;
+               }
+
+            }
+
+            input {
+                width: 250px;
+            }
+
+            .small-input {
+                width: 100px;
+            }
+        }
+    }
+
+    .ui-radio {
+        label {
+            &:after {
+                content: "";
+            }
+        }
+    }
+
+    .form-3 {
+
+        #auto-complete-component {
+            position: relative;
+
+            .selected-pill {
+                font-size: 16px;
+                padding: 2px;
+                border: 1px solid $color-agro-red;
+                border-radius: 2px;
+                margin: 3px;
+                background: $color-agro-red;
+                color: white;
+                display: flex;
+                align-items: center;
+
+                &:after {
+                    content: '×';
+                    padding-left: 5px;
+
+                }
+            }
+
+            .multi-selected-options-wrapper {
+                background: $color-input-background;
+                box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 0 transparent;
+            }
+
+            .suggestion-item {
+                padding: 4px 0;
+                font-size: 16px;
+                color: $color-text;
+
+                &:hover {
+                    background: $color-agro-red;
+                    color: white;
+                    font-weight: bold;
+                }
+            }
+
+
+            .multi-select-input {
+                width: 200px;
+            }
+
+            .multi-select-suggestion {
+                width: 200px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 760px) {
+
+        .input-field {
+
+            label {
+                margin-bottom: 5px;
+            }
+
+            width: 100%;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .multi-selector-wrapper {
+            align-items: flex-start;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        .form-row {
+            flex-direction: column;
+        }
+    }
+}
+
