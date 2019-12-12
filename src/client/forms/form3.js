@@ -1,12 +1,24 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef
+} from "react";
 import { connect } from "react-redux";
+import { FormHeader } from "./common-components";
 
 import { fetchHobbies } from "./actions";
 import AutoComplete from "../selector";
 
+import { patchForm } from "./actions";
+
 const Form3 = ({ hobbies, dispatch }) => {
+  const [key, setKey] = useState(true);
   const [loading, setLoading] = useState(false);
   const [selectedHobbies, setHobbies] = useState([]);
+
+  const emailRef = useRef();
 
   const filterHobbiesMemo = useMemo(() => {
     return hobbies.filter(
@@ -22,6 +34,14 @@ const Form3 = ({ hobbies, dispatch }) => {
     });
   }, [hobbies, selectedHobbies]);
 
+  const onButtonClick = () => {
+    setLoading(true);
+    patchForm(3, {
+      hobbies: [...selectedHobbies],
+      email: emailRef.current.value
+    }).then(() => setLoading(false));
+  };
+
   const fetchData = () => {
     setLoading(true);
     fetchHobbies(dispatch).then(() => {
@@ -33,14 +53,13 @@ const Form3 = ({ hobbies, dispatch }) => {
   useEffect(fetchData, []);
 
   return (
-    <div className="layer sub-form form-3">
-      <div className="form-header">
-        <span className="title">FORM 3</span>
-        <div className="action-btn-group">
-          <button type="button">Save</button>
-          <button className="transparent">Clear</button>
-        </div>
-      </div>
+    <div className="layer sub-form form-3" key={key}>
+      <FormHeader
+        title="FORM 3"
+        onSaveClick={onButtonClick}
+        onClearClick={() => setKey(!key)}
+        loading={loading}
+      />
       <div className="d-flex form-row">
         <div className="d-flex align-items-center input-field">
           <label>Select Your Hobbies</label>
@@ -48,7 +67,7 @@ const Form3 = ({ hobbies, dispatch }) => {
         </div>
         <div className="input-field">
           <label>Email Id</label>
-          <input type="email" required />
+          <input type="email" required ref={emailRef}/>
         </div>
       </div>
     </div>

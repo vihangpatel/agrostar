@@ -153,3 +153,26 @@ form {
         border: 5px solid $color-agro-red;
     }
 }
+
+.busy-loader {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+
+    border-radius: 50%;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
