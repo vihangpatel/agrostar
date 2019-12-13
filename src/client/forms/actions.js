@@ -9,8 +9,10 @@ const PATCH_API_MAP = {
   3: "//www.mocky.io/v2/5d0288b43100003400ab304a"
 };
 
-const GENDER_API_ENDPOINT = "http://www.mocky.io/v2/5d009a333200007700f9d5cb";
-const HOBBIES_API_ENDPOINT = "http://www.mocky.io/v2/5d0099b53200000f00f9d5c5";
+const FULL_FORM_SUBMISSIO = "http://www.mocky.io/v2/5d0288e43100004f4aab304b";
+
+const GENDER_API_ENDPOINT = "//www.mocky.io/v2/5d009a333200007700f9d5cb";
+const HOBBIES_API_ENDPOINT = "//www.mocky.io/v2/5d0099b53200000f00f9d5c5";
 
 export const GENDER_API_SUCCESS = "GENDER_API_SUCCESS";
 export const HOBBIES_API_SUCCESS = "HOBBIES_API_SUCCESS";
@@ -44,9 +46,17 @@ const unmountToast = () =>
 
 export const patchForm = (formId, data) =>
   Axios.put(PATCH_API_MAP[formId], data).then(response => {
-    unmountToast()
+    unmountToast();
+
+    // Responses are not parsable in JSON format
+    const isSuccess = response.data.indexOf("true") > -1
+
+    const message = isSuccess
+      ? `Form ${formId} submitted`
+      : "Error Occured while submitting";
+
     ReactDOM.render(
-      <Toast message={`Form ${formId} submitted`} onTimeout={unmountToast} />,
+      <Toast message={message} onTimeout={unmountToast} error={!isSuccess} />,
       document.querySelector("#toast-container")
     );
     return response;

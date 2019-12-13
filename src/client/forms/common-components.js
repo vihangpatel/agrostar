@@ -40,12 +40,11 @@ export const FormHeader = ({ title, loading, onSaveClick, onClearClick }) => (
   </div>
 );
 
-export const Toast = ({ message, timeOut, onTimeout }) => {
+export const Toast = ({ message, timeOut, onTimeout, error }) => {
   const toastRef = useRef();
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-
     // hide the class with animation
     const timer1 = setTimeout(() => {
       toastRef.current.classList.add("toast--hide");
@@ -54,16 +53,16 @@ export const Toast = ({ message, timeOut, onTimeout }) => {
     // trigger unmount
     const timer2 = setTimeout(() => {
       setShow(false);
-      setTimeout(() => onTimeout && onTimeout(), 1)
+      setTimeout(() => onTimeout && onTimeout(), 1);
     }, timeOut || 5000);
 
     return () => {
-      clearTimeout(timer1)
-      clearTimeout(timer2)
-    }
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, [message]);
   return show ? (
-    <div className="toast" ref={toastRef}>
+    <div className={`toast ${error ? "toast--error" : ""}`} ref={toastRef}>
       {message}
     </div>
   ) : null;
