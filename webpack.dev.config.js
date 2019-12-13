@@ -76,6 +76,6 @@ module.exports = {
       __DEV__: true,
       __CLIENT__: true
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

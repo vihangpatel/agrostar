@@ -4,10 +4,13 @@
   "description": "Form Filling Application",
   "main": "index.js",
   "scripts": {
+    "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --watch --config webpack.dev.config.js",
-    "build": "webpack --config webpack.config.js",
-    "start": "node ./dist/server.js",
+    "build": "rm -rf ./dist && webpack --config webpack.config.js && npm run transpile",
+    "start": "node ./dist/src/server -p $PORT",
+    "copystats": "cp ./dist/build/stats.json ./dist/src/server/stats.json",
+    "transpile": "babel ./src --out-dir ./dist/src && cp -r ./src/styles ./dist/src/styles && npm run copystats",
     "kill": "lsof -i tcp:9090 | grep LISTEN | awk '{print $2}' | xargs kill -9",
     "restart-dev-server": "npm run kill && babel-node ./src/server/index.js",
     "dev-server": "ENV=development nodemon --exec npm run restart-dev-server --watch ./src"
@@ -23,6 +26,7 @@
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.3.0",
+    "ignore-loader": "^0.1.2",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
@@ -30,6 +34,8 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
+    "webpack-node-externals": "^1.7.2",
+    "webpack-stats-plugin": "^0.3.0",
     "write-file-webpack-plugin": "^4.5.1"
   },
   "dependencies": {
