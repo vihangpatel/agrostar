@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 const Footer = () => <div className="d-flex footer">
   <span>#HelpingFarmersWin</span>
   <span>Build with Webpack, Heroku, React & Redux</span>
-  <span><a target='_blank' href='https://github.com/vihangpatel/agrostar'></a>{"</> See Code"}</span>
+  <span><a target='_blank' href='https://github.com/vihangpatel/agrostar'>{"</> See Code"}</a></span>
 </div>
 
 const App = ({ form1Data, form2Data, form3Data }) => {
