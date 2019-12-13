@@ -8,8 +8,14 @@ import "../styles/index.scss";
 import { submitForm, createToast } from "./forms/actions";
 import { connect } from "react-redux";
 
+const Footer = () => <div className="d-flex footer">
+  <span>#HelpingFarmersWin</span>
+  <span>Build with Webpack, Heroku, React & Redux</span>
+  <span><a target='_blank' href='https://github.com/vihangpatel/agrostar'></a>{"</> See Code"}</span>
+</div>
+
 const App = ({ form1Data, form2Data, form3Data }) => {
-  console.log("*** ", form1Data, form2Data, form3Data);
+
   const [loading, setLoading] = useState(false);
 
   const onSubmit = e => {
@@ -29,7 +35,7 @@ const App = ({ form1Data, form2Data, form3Data }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container d-flex flex-column">
       <div className="container__header">AGROSTAR, PUNE</div>
       <div className="container__form-section">
         <form onSubmit={onSubmit}>
@@ -52,6 +58,7 @@ const App = ({ form1Data, form2Data, form3Data }) => {
         </form>
       </div>
       <div id="toast-container"></div>
+      <Footer />
     </div>
   );
 };
