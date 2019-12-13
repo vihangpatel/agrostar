@@ -17,7 +17,7 @@ const Form2 = ({ genders, dispatch }) => {
     setLoading(true);
     patchForm(2, {
       address: addressRef.current.value,
-      gender: radioRef.current.querySelector('input').value
+      gender: radioRef.current.querySelector("input").value
     }).then(() => setLoading(false));
   };
 
@@ -27,6 +27,21 @@ const Form2 = ({ genders, dispatch }) => {
   };
 
   useEffect(fetchData, []);
+
+  const putInStore = () => {
+    dispatch({
+      type: "SAVE_FORM_2",
+      payload: {
+        address: addressRef.current.value,
+        gender: radioRef.current && radioRef.current.querySelector("input")?.value
+      }
+    });
+  };
+
+  useEffect(() => {
+    putInStore()
+  }, [key])
+
   return (
     <div className="layer sub-form" key={key}>
       <FormHeader
@@ -39,7 +54,7 @@ const Form2 = ({ genders, dispatch }) => {
       <div className="d-flex form-row">
         <div className="d-flex align-items-start input-field">
           <label>Address</label>
-          <textarea rows={5} cols={50} required ref={addressRef}/>
+          <textarea rows={5} cols={50} required ref={addressRef} onChange={putInStore}/>
         </div>
         <div className="d-flex input-field">
           <label>Select Gender</label>
@@ -50,6 +65,7 @@ const Form2 = ({ genders, dispatch }) => {
                 label={_.label}
                 radioGroup="gender"
                 required
+                onChange={putInStore}
               />
             ))}
           </div>

@@ -11,6 +11,7 @@ export const Radio = props => {
             className="radio-input"
             name={props.radioGroup}
             value={props.label}
+            onChange={props.onChange}
           />
           <span className="custom-holder"></span>
         </div>
@@ -20,11 +21,13 @@ export const Radio = props => {
   );
 };
 
+export const noop = () => {}
+
 export const FormHeader = ({ title, loading, onSaveClick, onClearClick }) => (
   <div className="form-header">
     <span className="title">{title}</span>
     <div className="action-btn-group d-flex">
-      <button type="button" onClick={onSaveClick}>
+      <button type="button" onClick={!loading ? onSaveClick : noop}>
         {loading ? (
           <span>
             <div className="busy-loader"></div> Loading...{" "}

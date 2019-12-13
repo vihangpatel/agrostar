@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import { patchForm } from "./actions";
 import { FormHeader } from "./common-components";
+import { connect } from "react-redux";
 
-const Form1 = () => {
+const Form1 = ({ dispatch }) => {
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState(true);
   const ageRef = useRef();
@@ -17,6 +18,20 @@ const Form1 = () => {
     }).then(() => setLoading(false));
   };
 
+  const putInStore = () => {
+    dispatch({
+      type: "SAVE_FORM_1",
+      payload: {
+        age: ageRef.current.value,
+        name: nameRef.current.value
+      }
+    });
+  };
+
+  useEffect(() => {
+    putInStore()
+  }, [key])
+
   return (
     <div className="layer sub-form" key={key}>
       <FormHeader
@@ -29,7 +44,7 @@ const Form1 = () => {
       <div className="d-flex form-row">
         <div className="input-field">
           <label>Full Name</label>
-          <input type="text" required ref={nameRef} />
+          <input type="text" required ref={nameRef} onChange={putInStore} />
         </div>
         <div className="input-field">
           <label>Select Age</label>
@@ -40,6 +55,7 @@ const Form1 = () => {
             min="0"
             max="150"
             required
+            onChange={putInStore}
           />
           <div className="error">Age should be 0 to 150</div>
         </div>
@@ -48,4 +64,4 @@ const Form1 = () => {
   );
 };
 
-export default Form1;
+export default connect()(Form1);

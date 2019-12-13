@@ -32,6 +32,7 @@ const Form3 = ({ hobbies, dispatch }) => {
       key: "label",
       selectedHobbies
     });
+    putInStore()
   }, [hobbies, selectedHobbies]);
 
   const onButtonClick = () => {
@@ -51,6 +52,19 @@ const Form3 = ({ hobbies, dispatch }) => {
 
   useEffect(memoizedCallback, [hobbies, selectedHobbies]);
   useEffect(fetchData, []);
+  useEffect(() => {
+    putInStore()
+  }, [key])
+
+  const putInStore = () => {
+    dispatch({
+      type: "SAVE_FORM_3",
+      payload: {
+        hobbies: [...selectedHobbies],
+        email: emailRef.current.value
+      }
+    });
+  };
 
   return (
     <div className="layer sub-form form-3" key={key}>
@@ -70,7 +84,7 @@ const Form3 = ({ hobbies, dispatch }) => {
         </div>
         <div className="input-field">
           <label>Email Id</label>
-          <input type="email" required ref={emailRef} />
+          <input type="email" required ref={emailRef} onChange={putInStore}/>
         </div>
       </div>
     </div>
