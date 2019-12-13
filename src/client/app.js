@@ -26,6 +26,7 @@ const App = () => {
           </div>
         </form>
       </div>
+      <div id="toast-container"></div>
     </div>
   );
 };

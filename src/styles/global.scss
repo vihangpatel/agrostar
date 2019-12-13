@@ -168,6 +168,35 @@ form {
     animation: rotate 1s infinite linear;
 }
 
+.toast {
+    box-shadow: 0 6px 16px 10px rgba(27, 169, 76, 0.2);
+    background-color: #1ba94c;
+    color: #fff;
+    overflow: hidden;
+    padding: 15px 20px;
+    max-width: 600px;
+    line-height: 1.5;
+    top: 50px;
+    margin: auto;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    opacity: 1;
+    transition: all 1s linear;
+    display: flex;
+    align-items: center;
+
+    span {
+        margin-left: 20px;
+        font-size: 20px;
+    }
+
+    &--hide {
+        opacity: 0;
+    }
+}
+
 @keyframes rotate {
     0% {
         transform: rotate(0deg);

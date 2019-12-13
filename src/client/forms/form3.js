@@ -57,7 +57,10 @@ const Form3 = ({ hobbies, dispatch }) => {
       <FormHeader
         title="FORM 3"
         onSaveClick={onButtonClick}
-        onClearClick={() => setKey(!key)}
+        onClearClick={() => {
+          setHobbies([]);
+          setKey(!key);
+        }}
         loading={loading}
       />
       <div className="d-flex form-row">
@@ -67,7 +70,7 @@ const Form3 = ({ hobbies, dispatch }) => {
         </div>
         <div className="input-field">
           <label>Email Id</label>
-          <input type="email" required ref={emailRef}/>
+          <input type="email" required ref={emailRef} />
         </div>
       </div>
     </div>
